@@ -4,13 +4,14 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(normalizationContext={"groups"={"ticket"}},
- *     denormalizationContext={"groups"={"ticket"}})
  * @ORM\Entity(repositoryClass="App\Repository\ManyRepository")
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read", "ticket"}},
+ *     denormalizationContext={"groups"={"write", "ticket"}}
+ * )
  */
 class Many
 {
@@ -20,6 +21,7 @@ class Many
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 

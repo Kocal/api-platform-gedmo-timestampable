@@ -7,15 +7,14 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
  * @ApiResource(
- *     normalizationContext={"groups"={"ticket"}},
- *     denormalizationContext={"groups"={"ticket"}}
+ *     normalizationContext={"groups"={"read", "ticket"}},
+ *     denormalizationContext={"groups"={"write", "ticket"}}
  * )
  */
 class Ticket
@@ -26,6 +25,7 @@ class Ticket
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
